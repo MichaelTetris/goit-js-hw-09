@@ -25,3 +25,25 @@
   object-fit: cover;
   transition: transform var(--animation-duration) var(--timing-function);
 }
+
+.form-box{
+  position: fixed; top: 50%; left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.feedback-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+
+  border-radius: 8px;
+  padding: 24px;
+  width: 408px;
+  height: 296px;
+
+  background: yellow;
+}
