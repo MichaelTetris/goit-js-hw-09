@@ -3,9 +3,6 @@ import SimpleLightbox from "simplelightbox";
 
 import "simplelightbox/dist/simple-lightbox.min.css";
 
-const lightbox = new SimpleLightbox('.gallery a', { /* options */ });
-
-/* console.log(SimpleLightbox); */
 
 const galleryItems = [
   {
@@ -91,3 +88,9 @@ const galleryList = galleryItems
   .join("");
 
 galleryEl.insertAdjacentHTML("beforeend", galleryList);
+
+
+const lightbox = new SimpleLightbox('.gallery a', {
+    captionDelay: 250,
+    captionsData: 'alt'
+});
