@@ -12,6 +12,7 @@ const inputEmail = document.querySelector("input");
 const inputTextarea = document.querySelector("textarea");
 
 
+
 form.addEventListener("input", onTextInput);
 
 form.addEventListener("submit", handleSubmit);
@@ -20,14 +21,14 @@ function onTextInput(event){
   
   if(event.target === inputEmail){
     userForm.email = event.target.value;
-    console.log("email", userForm.email);
-  }else if (event.target === inputTextarea){
+  } else if (event.target === inputTextarea){
     userForm.message = event.target.value;
-    console.log("message", userForm.message);
-  }
+  }  
+
   const keyValue = JSON.stringify(userForm);  
   localStorage.setItem(storageKey, keyValue);
 }
+
 const savedMesage = JSON.parse(localStorage.getItem(storageKey));
 
 function saverTextInput(){
@@ -45,9 +46,17 @@ saverTextInput();
 
 function handleSubmit(event){
   event.preventDefault();
-  console.log(savedMesage);
 
-  event.currentTarget.reset();
-  localStorage.removeItem(storageKey);
+  const emailInput = form.querySelector("input[name='email']").value.trim();
+  const messageTextarea = form.querySelector("textarea[name='message']").value.trim();
+  if (emailInput !== '' && messageTextarea !== ''){
+    console.log("Значення ключа в localStorage:", userForm);
+    event.currentTarget.reset();
+    localStorage.removeItem(storageKey);
+    alert("Значение успешно удалено из localStorage.");
+  } else {
+    alert("Обидва поля повинні бути заповнені.");
+  }
   
-}
+};
+
