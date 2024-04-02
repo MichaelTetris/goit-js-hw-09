@@ -8,41 +8,34 @@ const userForm = {
 
 
 const form = document.querySelector(".feedback-form");
-const inputEmail = document.querySelector("input");
-const inputTextarea = document.querySelector("textarea");
-
-
-
-form.addEventListener("input", onTextInput);
-
-form.addEventListener("submit", handleSubmit);
-
-function onTextInput(event){
-  
-  if(event.target === inputEmail){
-    userForm.email = event.target.value;
-  } else if (event.target === inputTextarea){
-    userForm.message = event.target.value;
-  }  
-
-  const keyValue = JSON.stringify(userForm);  
-  localStorage.setItem(storageKey, keyValue);
-}
-
-const savedMesage = JSON.parse(localStorage.getItem(storageKey));
+const emailField = form.elements["email"];
+const messageField = form.elements["message"];
 
 function saverTextInput(){
-  
-  if(!savedMesage){
-    return;
-  }else{
-    inputEmail.value = savedMesage.email;
-    inputTextarea.value = savedMesage.message;
-  }
+  const savedMessage = JSON.parse(localStorage.getItem(storageKey));
+  if(savedMessage !== null){ 
+    emailField.value = savedMessage.email;
+    messageField.value = savedMessage.message;
+  }  
     
 };  
 
 saverTextInput();  
+
+form.addEventListener("input", onTextInput);
+form.addEventListener("submit", handleSubmit);
+
+function onTextInput(event){
+  
+  if(event.target === emailField){
+    userForm.email = event.target.value.trim();
+  } else if (event.target === messageField){
+    userForm.message = event.target.value.trim();
+  }  
+
+  const keyValue = JSON.stringify(userForm);  
+  localStorage.setItem(storageKey, keyValue);
+};
 
 function handleSubmit(event){
   event.preventDefault();
@@ -53,7 +46,7 @@ function handleSubmit(event){
     console.log("Значення ключа в localStorage:", userForm);
     event.currentTarget.reset();
     localStorage.removeItem(storageKey);
-    alert("Значение успешно удалено из localStorage.");
+    /* alert("Значення успішно видалено из localStorage."); */
   } else {
     alert("Обидва поля повинні бути заповнені.");
   }
