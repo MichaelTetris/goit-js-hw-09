@@ -75,7 +75,7 @@ const galleryEl = document.querySelector(".gallery");
 const galleryList = galleryItems
   .map(
     ({ preview, original, description }) => `
-<li class="item-gallery">
+<li class="gallery-item">
     <a class="gallery-link" href="${original}">
       <img
       class="gallery-img"
